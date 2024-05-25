@@ -59,7 +59,7 @@ import speech_recognition as sr
 import threading
 from Python.Tect_OpenCV_for_project import Hotkey_press
 # import inference
-import FIVferen
+from FIVferen import FIVferen
 from moviepy.editor import AudioFileClip
 import YouTubePlyatlist
 import screen_brightness_control as sbc
@@ -91,7 +91,7 @@ commands_dict = {
     "commands": {
         # "google": ["open google", "the open google", "Open Google.", " open google"],
         # "firefox": ["open firefox", "the open firefox"],
-        "off": ["switch off", "turn off", "turning off", "turn of", "during of", "during of", "the switch of", "power off", "turn up",],
+        "off": ["switch off", "turn off", "Darn off", "turning off", "turn of", "during of", "during of", "the switch of", "power off", "turn up",],
         "sound_off": ["mute it", "mute the sound", "muted", "muse it"],
         "sound_on": ["turn up the sound", "turn the sound up", "turn of the sound", "turns the sound up"],
         # "tanks": ["включи танчики"],
@@ -132,13 +132,13 @@ commands_dict = {
         # "Rand": ["рандом", "рандомные имена", "рандомайзер"],
         "LevelBattery": ["level battery", "level bettering", "I'll have all the battery", "battery", "level batery", "batery", "batery level", "battery level"],
         "Music_play_vrem": ["music", "Music"],
-        "Pause_play_vrem": ["pause music", "Pause music", "bounce music", "False mizzou", "Follow smith", "Bao's music", "Bowser music", "Boss music", "off music", "bowl's music", "Follow some music"],
+        "Pause_play_vrem": ["pause music", "Wow, it's music", "Pause the video if you like it", "Pause music", "bounce music", "Follows music", "False mizzou", "Follow smith", "Bao's music", "Bowser music", "Boss music", "off music", "bowl's music", "Follow some music"],
         "Сontinued_Pause_play_vrem": ["continued ", "Сontinued", "continue ", "Сontinue"],
         "Stop_play_vrem": ["stop music", "Stop music", "stop it", "stop using"],
         "Next": ["next music", "next", "next videos", "next news", "The next wizard"],
-        "Previous": ["previous music", "prev music", "previous videos", "previous news", "Pre-guess music"],
-        "Console": ["Console", "console", "And silent", "Cancelling", "Can't sell ya", "and solo"],
-        "ListenPlayList": ["listen play list", "listen playlist", "playlist", "play list", "awesome playlist", "or listen to the playlist", "lesson playlist"],
+        "Previous": ["previous music", "prev music", "Pray this music", "the bravest musi", "previous videos", "Brave-ass music!", "Bravest music", "previous news", "Pre-guess music", "Free this music", "Pretty nice music"],
+        "Console": ["Console", "I'm sorry", "cancel", "console", "And silent", "Cancelling", "Can't sell ya", "and solo"],
+        "ListenPlayList": ["listen play list", "Alexa and Playlist", "listen playlist", "playlist", "play list", "awesome playlist", "or listen to the playlist", "lesson playlist"],
         "Add_Music_Playlist": ["add music", "new music", "add playlist", "add play list", "create new music", "create music"],
         "Dell_Playlist": ["dell music", "delete music", "remove playlist", "delete playlist", "dell playlist", "remove music"],
         "Time": ["time now", "time", "now time", "current time", "Carrying time"],
@@ -773,7 +773,7 @@ def window_musik_nuw(nuw, vals):
         data["Music_Name"] = task_text
         with open('settings.json', 'w') as json_file:
             json.dump(data, json_file, indent=4)
-
+        print("grant_master")
         YouTubePlyatlist.search_video_vrem(task_text, my_path, vals)
 
     def on_enter_pressed(event=None):
@@ -782,9 +782,11 @@ def window_musik_nuw(nuw, vals):
         if task_text:
             print(task_text)
             if nuw:
+                print('1')
                 my_path = r"C:\Users\IVNsell\Desktop\IVNsell\Python\GestureVox Integration\Modern_GUI_PyDracula_PySide6_or_PyQt6-master\HierSpeechpp\HierSpeechpp\playlist_vrem"
                 threading.Thread(target=youtubeplay, args=(task_text, my_path, vals)).start()
             else:
+                print("2")
                 my_path = r"C:\Users\IVNsell\Desktop\IVNsell\Python\GestureVox Integration\Modern_GUI_PyDracula_PySide6_or_PyQt6-master\HierSpeechpp\HierSpeechpp\playlist"
                 threading.Thread(target=youtubeplay, args=(task_text, my_path, vals)).start()
             new_task_entry.delete(0, ctk.END)
@@ -1066,6 +1068,12 @@ def execute_cmd(k, vab, p):
     # elif fuzz.ratio(k, 'open_youtube') > 75:
     #     webbrowser.open("https://www.youtube.com/", 0, True)
     #     playsounds("ok")
+    cleaned_names = [name.strip() for name in data["Asistent name"]]
+    for name in cleaned_names:
+        if fuzz.ratio(p.join(p.split()[1:]).strip(), name) > 60:
+            playsounds("greet", True)
+            print("Yes, sir.")
+
     if k == 'tanks':
         subprocess.Popen(["C:/Games/World_of_Tanks_RU/wgc_api.exe"])
         playsounds("ok")
@@ -1850,7 +1858,7 @@ async def main():
                     # recorder.start()  # prevent self recording
                     ltc = time.time()
 
-                while time.time() - ltc <= 10:
+                while time.time() - ltc <= 5:
                     # pcm = recorder.read()
                     # sp = struct.pack("h" * len(pcm), *pcm)
                     # print("14")
