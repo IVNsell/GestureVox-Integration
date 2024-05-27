@@ -137,8 +137,8 @@ commands_dict = {
         "Stop_play_vrem": ["stop music", "Stop music", "stop it", "stop using"],
         "Next": ["next music", "next", "next videos", "next news", "The next wizard"],
         "Previous": ["previous music", "prev music", "Pray this music", "the bravest musi", "previous videos", "Brave-ass music!", "Bravest music", "previous news", "Pre-guess music", "Free this music", "Pretty nice music"],
-        "Console": ["Console", "I'm sorry", "cancel", "console", "And silent", "Cancelling", "Can't sell ya", "and solo"],
-        "ListenPlayList": ["listen play list", "Alexa and Playlist", "listen playlist", "playlist", "play list", "awesome playlist", "or listen to the playlist", "lesson playlist"],
+        "Console": ["Console", "Can't start it", "I'm sorry", "cancel", "console", "And silent", "Cancelling", "Can't sell ya", "and solo"],
+        "ListenPlayList": ["listen play list", "Please send playlist", "for this simple list", "Alexa and Playlist", "listen playlist", "playlist", "play list", "awesome playlist", "or listen to the playlist", "lesson playlist"],
         "Add_Music_Playlist": ["add music", "new music", "add playlist", "add play list", "create new music", "create music"],
         "Dell_Playlist": ["dell music", "delete music", "remove playlist", "delete playlist", "dell playlist", "remove music"],
         "Time": ["time now", "time", "now time", "current time", "Carrying time"],
@@ -881,6 +881,12 @@ def respondes_voice(voice: str):
     voice = ''.join(voice_list)
     print(f"Recognize: {voice}")
     Voice_new_commands_start_now.ckeck_num_comands_start(voice)
+    with open('settings.json', 'r', encoding='utf-8') as json_file:
+        datap = json.load(json_file)
+    cleaned_names = [name.strip() for name in datap["Asistent name"]]
+    for name in cleaned_names:
+        if fuzz.ratio(voice, name) > 60:
+            execute_cmd("piknik", 50, voice)
     for k, v in commands_dict["commands"].items():
         # print(v)
         for phrase in v:
@@ -1068,11 +1074,11 @@ def execute_cmd(k, vab, p):
     # elif fuzz.ratio(k, 'open_youtube') > 75:
     #     webbrowser.open("https://www.youtube.com/", 0, True)
     #     playsounds("ok")
-    cleaned_names = [name.strip() for name in data["Asistent name"]]
-    for name in cleaned_names:
-        if fuzz.ratio(p.join(p.split()[1:]).strip(), name) > 60:
-            playsounds("greet", True)
-            print("Yes, sir.")
+    with open('settings.json', 'r', encoding='utf-8') as json_file:
+        data = json.load(json_file)
+    if k == "piknik":
+        playsounds("greet", True)
+        print("Yes, sir.")
 
     if k == 'tanks':
         subprocess.Popen(["C:/Games/World_of_Tanks_RU/wgc_api.exe"])
