@@ -1,6 +1,6 @@
 # GestureVox Integration
 
-🏆 **INFOMATRIX World 2024 — Platinum (1st Place)**  
+🏆 **INFOMATRIX World 2024 - Platinum (1st Place)**  
 Voice-controlled desktop assistant with hand gesture recognition.
 
 > Multi-modal AI assistant: speak commands, control your PC with gestures, and interact through a modern desktop GUI.
@@ -30,7 +30,7 @@ The assistant listens for a wake phrase, recognizes speech, executes system comm
 - Text-to-speech responses
 
 ### 👋 Gesture Control
-- **MediaPipe Hands** — real-time hand tracking via webcam
+- **MediaPipe Hands** - real-time hand tracking via webcam
 - Custom gesture training and recognition (`Gesture_crt.py`)
 - Swipe gestures for navigation (`OpenCV_plus_ultra.py`)
 - Gesture + voice multimodal interaction
