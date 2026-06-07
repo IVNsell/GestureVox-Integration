@@ -6,7 +6,7 @@ Voice-controlled desktop assistant with hand gesture recognition.
 > Multi-modal AI assistant: speak commands, control your PC with gestures, and interact through a modern desktop GUI.
 
 **Author:** [Ivan Gaidarov](https://github.com/IVNsell)  
-**Competition:** [INFOMATRIX World Finals](https://www.infomatrix.ro/) — Programming category
+**Competition:** [INFOMATRIX World Finals](https://www.infomatrix.ro/) - Programming category
 
 ---
 
